@@ -19,7 +19,8 @@ Ext.define('Ext4Example.view.Viewport', {
             items: [
                 {
                     xtype: 'dynamicGrid',
-                    url: './data.js'
+                    url: './data.js',
+                    visibleColumns: ['Data', 'Name']
                 }
             ]
         });

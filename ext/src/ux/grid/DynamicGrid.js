@@ -10,12 +10,10 @@ Ext.define('Ext.ux.grid.DynamicGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.dynamicGrid',
     alternateClassName: 'Ext.grid.DynamicGrid',
-
-    requires: [
-        'Ext.ux.data.reader.DynamicReader'
-    ],
+    
     // URL used for request to the server. Required
     url: '',
+    visibleColumns: null,
 
     initComponent: function() {
         console.log('DynamicGrid initComponent!');
@@ -43,7 +41,9 @@ Ext.define('Ext.ux.grid.DynamicGrid', {
                     remoteFilter: false,
                     remoteGroup: false,
                     proxy: {
-                        reader: 'dynamicReader',
+                        reader: Ext.create('Ext.ux.data.reader.DynamicReader', {
+                            visibleColumns: me.visibleColumns
+                        }),
                         type: 'rest',
                         url: me.url
                     }
