@@ -11,12 +11,12 @@
 Ext.apply(Ext.data.Types, {
     FLOATORSTRING: {
         convert: function(v, n) {
-            v = Ext.isNumeric(v) ? Number(v.replace(',', '.')) : v;
+            v = Ext.isNumeric(v) ? Number(v) : v;
             return v;
         },
         sortType: function(v) {
-            v = Ext.isNumber(v) ? v : parseFloat(String(v), 10);
-            return isNaN(v) ? 0 : v;
+            v = Ext.isNumeric(v) ? Number(v) : v;
+            return v;
         },
         type: 'floatOrString'
     }
