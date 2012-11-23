@@ -19,7 +19,25 @@ Ext.define('Ext4Example.view.Viewport', {
             items: [
                 {
                     xtype: 'dynamicGrid',
-                    url: './data.js'
+                    url: './data.js',
+                    dockedItems: [
+                        {
+                            xtype: 'toolbar',
+                            dock: 'top',
+                            items: [
+                                {
+                                    xtype: 'button',
+                                    text: 'Load Data',
+                                    action: 'btnLoadData'
+                                },
+                                {
+                                    xtype: 'button',
+                                    text: 'Load Data2',
+                                    action: 'btnLoadData2'
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         });
