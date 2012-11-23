@@ -30,6 +30,7 @@ Ext.define('Ext4Example.controller.Stocks', {
             dynamicGrid.headerCt.remove(column);
         }
         dynamicGrid.getView().refresh();
+        dynamicGrid.getStore().removeAll();
         dynamicGrid.getStore().getProxy().url = './data2.js';
         dynamicGrid.getStore().load();
     }
