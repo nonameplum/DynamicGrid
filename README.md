@@ -3,6 +3,7 @@ DynamicGrid
 
 Example - Dynamic grid with dynamic model - Extjs addon.
 
+```
 Code example:
 Ext.create('Ext.window.Window', {
     width: 400,
@@ -17,6 +18,7 @@ Ext.create('Ext.window.Window', {
         }
     ]
 });
+```
 
 Check also visibleColumns branch - possibilty to define which columns have to be visible.
 
