@@ -26,37 +26,76 @@ Ext.define('Ext.ux.data.reader.DynamicReader', {
     extend: 'Ext.data.reader.Json',
     alias: 'reader.dynamicReader',
     alternateClassName: 'Ext.data.reader.DynamicReader',
-    visibleColumns: undefined,
 
     readRecords: function(data) {
-        if (data.length > 0) {
-            var item = data[0];
-            var fields = [];
-            var columns = [];
-            var p;
-
-            var IsCustomColumns = this.visibleColumns != undefined && this.visibleColumns.length > 0;
+		var item,
+			fields,
+			field,
+			columns,
+			column,
+			p,
+			fieldConfig,
+			columnConfig,
+			c,			
+			records,
+			i;
+		
+		if(Ext.isArray(data)) {
+			records = data;
+		} else {
+			records = data.data;
+			fieldConfig = data.fields;
+			columnConfig= data.columns;
+		}
+        if (records.length > 0) {
+            item = records[0];
+            fields = [];
+            columns = [];
 
             for (p in item) {
-                if (p && p != undefined) {
-                    // floatOrString type is only an option
-                    // You can make your own data type for more complex situations
-                    // or set it just to 'string'
-                    if (IsCustomColumns) {
-                        if (Ext.Array.contains(this.visibleColumns, p)) {
-                            fields.push({name: p, type: 'floatOrString'});
-                            columns.push({text: p, dataIndex: p});
-                        }
-                    } else {
-                        fields.push({name: p, type: 'floatOrString'});
-                        columns.push({text: p, dataIndex: p});
-                    }
+                if (p && p !== undefined) {					
+					fields.push({name: p, type: 'string'});											
+					columns.push({text: p, dataIndex: p});
                 }
             }
+			
+			if(fieldConfig !== undefined) {				
+				for(i=0; i < fieldConfig.length; i++) {
+					c = fieldConfig[i];
+					if(Ext.isEmpty(c.name))
+						continue;
+						
+					//Look if we have defined the field already
+					field = Ext.Array.findBy(fields,function(item,idx) {
+						if(item.name === c.name)
+							return true; 
+					});
+					
+					if(!Ext.isEmpty(field))
+						Ext.apply(field,c);
+				}
+			}
+			
+			if(columnConfig !== undefined) {
+				for(i=0; i < columnConfig.length; i++) {
+					c = columnConfig[i];
+					if(Ext.isEmpty(c.name))
+						continue;
+						
+					//Look if we have defined the column already
+					column = Ext.Array.findBy(columns,function(item,idx) {
+						if(item.dataIndex === c.name)
+							return true; 
+					});
+					
+					if(!Ext.isEmpty(column))
+						Ext.apply(column,c);
+				}			
+			}
 
-            data.metaData = { fields: fields, columns: columns };
+            records.metaData = { fields: fields, columns: columns };
         }
 
-        return this.callParent([data]);
+        return this.callParent([records]);
     }
 });
