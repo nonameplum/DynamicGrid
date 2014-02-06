@@ -22,6 +22,8 @@ Ext.create('Ext.window.Window', {
 
 Check also visibleColumns branch - possibilty to define which columns have to be visible.
 
+Check also configurationJsonResponse (Hadsch's patch - thanks) - possibility to define columns and fields in json response. 
+
 Plugin code is very short and easy to modify.
 
 Feel free to use.
