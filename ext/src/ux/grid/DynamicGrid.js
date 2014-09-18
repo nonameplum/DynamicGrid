@@ -4,6 +4,8 @@
  *
  * Dynamic grid, allow to display data setting only URL.
  * Columns and model will be created dynamically.
+ * 
+ * ExtJs 4.2
  */
 
 Ext.define('Ext.ux.grid.DynamicGrid', {
@@ -33,10 +35,10 @@ Ext.define('Ext.ux.grid.DynamicGrid', {
                     fields: [],
                     // After loading data grid have to reconfigure columns with dynamic created columns
                     // in Ext.ux.data.reader.DynamicReader
-                    listeners: {
-                        'metachange': function(store, meta) {
-                            me.reconfigure(store, meta.columns);
-                        }
+					listeners: {
+						'load': function(store, records, successful, eOpts) {
+							me.reconfigure(store, store.getProxy().getReader().metaData.columns);
+						}
                     },
                     autoLoad: true,
                     remoteSort: false,
