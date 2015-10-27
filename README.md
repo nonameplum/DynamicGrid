@@ -29,4 +29,7 @@ Ext.create('Ext.window.Window', {
 
 Plugin code is very short and easy to modify.
 
+Discution on Sencha forum:
+https://www.sencha.com/forum/showthread.php?242594-Dynamic-grid-with-dynamic-model
+
 Feel free to use.
